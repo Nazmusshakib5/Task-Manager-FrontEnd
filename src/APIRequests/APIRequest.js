@@ -101,7 +101,7 @@ export function loginApi(email,password,onSuccess){
             store.dispatch(HideLoader())
             if(res.data.status==='success'){
                 setToken(res.data['token'])
-                setUserDetails(res.data['userNo'])
+                setUserDetails(res.data['userData'][0])
                 if(onSuccess){
                     onSuccess()
                 }

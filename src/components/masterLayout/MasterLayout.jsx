@@ -17,6 +17,7 @@ const MasterLayout = (props) => {
         removeSessions();
     }
 
+
     const MenuBarClickHandler = () => {
         let sideNav = sideNavRef;
         let content = contentRef;
@@ -44,11 +45,11 @@ const MasterLayout = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src="https://wallpapers.com/images/hd/best-profile-pictures-xrona5c4apl7qvrj.jpg" alt=""/>
+                            <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src="https://wallpapers.com/images/hd/best-profile-pictures-xrona5c4apl7qvrj.jpg" alt=""/>
-                                    <h6>Nazmus Shakib</h6>
+                                    <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
+                                    <h6>{`${getUserDetails()['firstName']+' '+getUserDetails()['lastName']}`}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
                                 <NavLink to="/profile" className="side-bar-item">
