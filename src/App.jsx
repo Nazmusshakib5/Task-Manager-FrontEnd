@@ -19,20 +19,21 @@ import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
 
 
 const App = () => {
-    const [token, setTokenState] = useState(getToken()); // Initialize state with current token
-
-    useEffect(() => {
-        const handleTokenChange = () => {
-            setTokenState(getToken()); // Update state when token changes
-        };
-
-        window.addEventListener("tokenChange", handleTokenChange);
-
-        return () => {
-            window.removeEventListener("tokenChange", handleTokenChange);
-        };
-    }, []);
-    if(token){
+    // const [token, setTokenState] = useState(getToken()); // Initialize state with current token
+    //
+    //
+    // useEffect(() => {
+    //     const handleTokenChange = () => {
+    //         setTokenState(getToken()); // Update state when token changes
+    //     };
+    //
+    //     window.addEventListener("tokenChange", handleTokenChange);
+    //
+    //     return () => {
+    //         window.removeEventListener("tokenChange", handleTokenChange);
+    //     };
+    // }, []);
+    if(getToken()){
         return (
             <Fragment >
                 <BrowserRouter>

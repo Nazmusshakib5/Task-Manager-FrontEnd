@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 export const settingsSlice=createSlice({
     name:'settings',
     initialState:{
-        loader:"d-none"
+        loader:"d-none",
     },
     reducers:{
         ShowLoader:(state)=>{

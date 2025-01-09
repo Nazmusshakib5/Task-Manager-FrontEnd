@@ -1,11 +1,11 @@
 import {Fragment, useRef} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {loginApi} from "../../APIRequests/APIRequest.js";
 import {ErrorToast, IsEmail, IsEmpty} from "../../helper/FormValidationHelper.js";
 
 const Login = () => {
     let emailRef,passwordRef=useRef();
-    const navigate=useNavigate()
+
 
     const onLogin=()=>{
         let email=emailRef.value;
@@ -18,7 +18,11 @@ const Login = () => {
             ErrorToast('Valid Password Required')
         }
         else {
-            loginApi(email,password,()=>navigate('/'))
+            loginApi(email,password).then((res)=>{
+                if(res===true){
+                    window.location.href="/"
+                }
+            })
         }
     }
 
@@ -31,9 +35,9 @@ const Login = () => {
                             <div className="card-body">
                                 <h4>SIGN IN</h4>
                                 <br/>
-                                <input ref={(inp)=>emailRef=inp}  placeholder="User Email" className="form-control animated fadeInUp" type="email"/>
+                                <input ref={(inp)=>emailRef=inp}  placeholder="User Email" className="form-control animated fadeInUp customFocus" type="email"/>
                                 <br/>
-                                <input ref={(inp)=>passwordRef=inp}  placeholder="User Password" className="form-control animated fadeInUp" type="password"/>
+                                <input ref={(inp)=>passwordRef=inp}  placeholder="User Password" className="form-control animated fadeInUp customFocus " type="password"/>
                                 <br/>
                                 <button onClick={onLogin} className="btn w-100 animated fadeInUp float-end btn-primary mainBtn">Next</button>
                                 <hr/>

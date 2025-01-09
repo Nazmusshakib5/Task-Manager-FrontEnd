@@ -1,6 +1,10 @@
+
+
 class SessionHelper{
+
     setToken(token){
         localStorage.setItem("token",token)
+
         window.dispatchEvent(new Event("tokenChange"));
     }
     getToken(){
@@ -39,4 +43,5 @@ class SessionHelper{
     }
 
 }
-export const {setEmail,getEmail,setOTP,getOTP,setToken,getToken,setUserDetails,getUserDetails,removeSessions}=new SessionHelper();
+export const {setEmail,getEmail,setOTP,getOTP,setToken,getToken,setUserDetails,getUserDetails,
+    removeSessions,setReduxToken}=new SessionHelper();

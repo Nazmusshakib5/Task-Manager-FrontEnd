@@ -49,27 +49,27 @@ const Registration = () => {
                                     <div className=" col-md-12 p-2">
                                         <label>Email Address</label>
                                         <input ref={(inp)=>emailRef=inp}  placeholder="User Email"
-                                               className="form-control animated fadeInUp" type="email"/>
+                                               className="form-control animated fadeInUp customFocus" type="email"/>
                                     </div>
                                     <div className=" col-md-12 p-2">
                                         <label>First Name</label>
                                         <input ref={(inp)=>firstNameRef=inp}  placeholder="First Name"
-                                               className="form-control animated fadeInUp" type="text"/>
+                                               className="form-control animated fadeInUp customFocus" type="text"/>
                                     </div>
                                     <div className=" col-md-12 p-2">
                                         <label>Last Name</label>
                                         <input ref={(inp)=>lastNameRef=inp}  placeholder="Last Name"
-                                               className="form-control animated fadeInUp" type="text"/>
+                                               className="form-control animated fadeInUp customFocus" type="text"/>
                                     </div>
                                     <div className=" col-md-12 p-2">
                                         <label>Mobile Number</label>
                                         <input ref={(inp)=>mobileRef=inp} placeholder="Mobile"
-                                               className="form-control animated fadeInUp" type="mobile"/>
+                                               className="form-control animated fadeInUp customFocus" type="mobile"/>
                                     </div>
                                     <div className=" col-md-12 p-2">
                                         <label>Password</label>
                                         <input ref={(inp)=>passwordRef=inp} placeholder="User Password"
-                                               className="form-control animated fadeInUp" type="password"/>
+                                               className="form-control animated fadeInUp customFocus" type="password"/>
                                     </div>
 
                                 </div>

@@ -34,37 +34,43 @@ const MasterLayout = (props) => {
         }
     };
 
+    const userDetails=getUserDetails()
+
     return (
         <Fragment>
-            <Navbar  className="fixed-top px-0 shadow-sm ">
-                <Container fluid={true}>
-                    <Navbar.Brand >
-                        <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/></a>
-                        <img className="nav-logo mx-2"  src={logo} alt="logo"/>
-                    </Navbar.Brand>
+            {
+                userDetails && userDetails.photo?(
+                    <Navbar  className="fixed-top px-0 shadow-sm ">
+                        <Container fluid={true}>
+                            <Navbar.Brand >
+                                <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/></a>
+                                <img className="nav-logo mx-2"  src={logo} alt="logo"/>
+                            </Navbar.Brand>
 
-                    <div className="float-right h-auto d-flex">
-                        <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
-                            <div className="user-dropdown-content ">
-                                <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
-                                    <h6>{`${getUserDetails()['firstName']+' '+getUserDetails()['lastName']}`}</h6>
-                                    <hr className="user-dropdown-divider  p-0"/>
+                            <div className="float-right h-auto d-flex">
+                                <div className="user-dropdown">
+                                    <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
+                                    <div className="user-dropdown-content ">
+                                        <div className="mt-4 text-center">
+                                            <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
+                                            <h6>{`${getUserDetails()['firstName']+' '+getUserDetails()['lastName']}`}</h6>
+                                            <hr className="user-dropdown-divider  p-0"/>
+                                        </div>
+                                        <NavLink to="/profile" className="side-bar-item">
+                                            <AiOutlineUser className="side-bar-item-icon" />
+                                            <span className="side-bar-item-caption">Profile</span>
+                                        </NavLink>
+                                        <a onClick={onLogout}  className="side-bar-item">
+                                            <AiOutlineLogout className="side-bar-item-icon" />
+                                            <span className="side-bar-item-caption">Logout</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <NavLink to="/profile" className="side-bar-item">
-                                    <AiOutlineUser className="side-bar-item-icon" />
-                                    <span className="side-bar-item-caption">Profile</span>
-                                </NavLink>
-                                <a onClick={onLogout}  className="side-bar-item">
-                                    <AiOutlineLogout className="side-bar-item-icon" />
-                                    <span className="side-bar-item-caption">Logout</span>
-                                </a>
                             </div>
-                        </div>
-                    </div>
-                </Container>
-            </Navbar>
+                        </Container>
+                    </Navbar>
+                ):('')
+            }
 
             <div ref={(div) =>{sideNavRef=div}} className="side-nav-open">
 

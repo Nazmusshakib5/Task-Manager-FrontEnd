@@ -12,7 +12,6 @@ const AxiosHeader={headers:{'token':getToken()}}
 
 const baseUrl='https://task-manager-api-jet.vercel.app/api/v1';
 
-const localUrl='http://localhost:3040/api/v1'
 
 export function DashboardTotalTask(){
     store.dispatch(ShowLoader())
@@ -92,30 +91,30 @@ export function CreateNewTask(task,description){
 }
 
 
-export function loginApi(email,password,onSuccess){
+export function loginApi(email,password){
     store.dispatch(ShowLoader())
     let url=baseUrl+'/login'
     let postBody={
         email:email,
         password:password
     }
-     axios.post(url,postBody)
+    return axios.post(url,postBody)
         .then((res)=>{
             store.dispatch(HideLoader())
             if(res.data.status==='success'){
                 setToken(res.data['token'])
                 setUserDetails(res.data['userData'][0])
-                if(onSuccess){
-                    onSuccess()
-                }
+                return true
             }
             else {
                 ErrorToast('Incorrect Email or Password')
+                return false
             }
         })
         .catch((err)=>{
             store.dispatch(HideLoader())
             ErrorToast('Error')
+            return false
         })
 }
 

@@ -9,9 +9,8 @@ const Dashboard = () => {
     }, []);
 
     const totalDashboardTask=useSelector((state)=>state.summary.total)
-    console.log(totalDashboardTask)
-    return (
-        <div className='container'>
+
+     return ( <div className='container'>
           <div className='row'>
               {
                  totalDashboardTask && totalDashboardTask.map((item,i)=> {
