@@ -5,6 +5,7 @@ import {HideLoader, ShowLoader} from "../redux/state-slice/settingSlice.js";
 import {getToken, setToken, setUserDetails} from "../helper/SessionHelper.js";
 import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state-slice/taskSlice.js";
 import {SetSummaryValue} from "../redux/state-slice/dashboardSummarySlice.js";
+import {SetProfile} from "../redux/state-slice/profileSlice.js";
 
 
 const AxiosHeader={headers:{'token':getToken()}}
@@ -189,4 +190,51 @@ export function updateTaskApi(id,status){
             ErrorToast('Error Has Occured')
             return false
         })
+}
+
+
+export function GetProfileDetails(){
+    store.dispatch(ShowLoader())
+    let URL=baseUrl+"/profileDetails";
+    axios.get(URL,AxiosHeader).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.data.data['status'] === 'success'){
+            store.dispatch(SetProfile(res.data.data['data'][0]))
+        }
+        else{
+            ErrorToast("Profile Not Found")
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Error Occured")
+        store.dispatch(HideLoader())
+    });
+}
+
+export function ProfileUpdateRequest(email,firstName,lastName,mobile,password,photo){
+
+    store.dispatch(ShowLoader())
+
+    let URL=baseUrl+"/updateProfile";
+
+    let PostBody={email:email,firstName:firstName,lastName:lastName,mobile:mobile,password:password,photo:photo}
+    let UserDetails={email:email,firstName:firstName,lastName:lastName,mobile:mobile,photo:photo}
+
+    return axios.post(URL,PostBody,AxiosHeader).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.data.data['status'] === 'success'){
+
+            SuccessToast("Profile Update Success")
+            setUserDetails(UserDetails)
+
+            return true;
+        }
+        else{
+            ErrorToast("Profile Update Failed")
+            return  false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Error Occured")
+        store.dispatch(HideLoader())
+        return false;
+    });
 }
