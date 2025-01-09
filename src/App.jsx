@@ -14,6 +14,8 @@ import ProgressPage from "./pages/ProgressPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import FullScreenLoader from "./components/masterLayout/FullScreenLoader.jsx";
 import {getToken} from "./helper/SessionHelper.js";
+import VerifyOTPPage from "./pages/VerifyOTPPage.jsx";
+import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
 
 
 const App = () => {
@@ -60,6 +62,8 @@ const App = () => {
                         <Route path='/login' element={<LoginPage/>}/>
                         <Route path='/registration' element={<RegistrationPage/>}/>
                         <Route path='/forgetpass' element={<ForgetPasswordPage/>}/>
+                        <Route path='/verifyOTP' element={<VerifyOTPPage/>}/>
+                        <Route path='/createPassword' element={<ResetPasswordPage/>}/>
                         <Route path='*' element={<ErrorPage/>}/>
                     </Routes>
                 </BrowserRouter>

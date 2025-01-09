@@ -1,15 +1,15 @@
 import LazyLoader from "../components/masterLayout/LazyLoader.jsx";
 import {Suspense,lazy} from "react";
-const SendOTP =lazy(()=>import("../components/RecoverPassword/SendOTP.jsx"))
+const VerifyOTP =lazy(()=>import("../components/RecoverPassword/VerifyOTP.jsx"))
 
-const ForgetPasswordPage = () => {
+const VerifyOtpPage = () => {
     return (
         <div>
             <Suspense fallback={<LazyLoader/>}>
-                <SendOTP/>
+                <VerifyOTP/>
             </Suspense>
         </div>
     );
 };
 
-export default ForgetPasswordPage;
+export default VerifyOtpPage;

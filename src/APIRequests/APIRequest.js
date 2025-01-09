@@ -2,7 +2,7 @@ import axios from "axios";
 import {ErrorToast, SuccessToast} from "../helper/FormValidationHelper.js";
 import store from "../redux/store/store.js";
 import {HideLoader, ShowLoader} from "../redux/state-slice/settingSlice.js";
-import {getToken, setToken, setUserDetails} from "../helper/SessionHelper.js";
+import {getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper.js";
 import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state-slice/taskSlice.js";
 import {SetSummaryValue} from "../redux/state-slice/dashboardSummarySlice.js";
 import {SetProfile} from "../redux/state-slice/profileSlice.js";
@@ -11,6 +11,8 @@ import {SetProfile} from "../redux/state-slice/profileSlice.js";
 const AxiosHeader={headers:{'token':getToken()}}
 
 const baseUrl='https://task-manager-api-jet.vercel.app/api/v1';
+
+const localUrl='http://localhost:3040/api/v1'
 
 export function DashboardTotalTask(){
     store.dispatch(ShowLoader())
@@ -234,6 +236,76 @@ export function ProfileUpdateRequest(email,firstName,lastName,mobile,password,ph
         }
     }).catch((err)=>{
         ErrorToast("Something Error Occured")
+        store.dispatch(HideLoader())
+        return false;
+    });
+}
+
+
+export function RecoverVerifyEmailRequest(email){
+    store.dispatch(ShowLoader())
+    let URL=baseUrl+"/recoverVerifyEmail/"+email;
+    return axios.get(URL).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.data.data['status'] ==='failed'){
+                ErrorToast("No user found");
+                return false;
+        }
+        else{
+            setEmail(email)
+            SuccessToast("A 6 Digit verification code has been sent to your email address. ");
+            return true;
+        }
+    })
+        .catch((err)=>{
+        ErrorToast("Error Occured")
+            console.log(err)
+        store.dispatch(HideLoader())
+        return false;
+    });
+}
+
+
+export function RecoverVerifyOTPRequest(email,OTP){
+    store.dispatch(ShowLoader())
+    let URL=baseUrl+"/recoverVerifyOTP/"+email+"/"+OTP;
+    return axios.get(URL).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.data.data['status'] ==='failed'){
+                ErrorToast("Verification failed");
+                return false;
+        }
+        else{
+            setOTP(OTP)
+            SuccessToast("Code Verification Success");
+            return true;
+        }
+    }).catch((err)=>{
+        ErrorToast("Error Occured")
+        store.dispatch(HideLoader())
+        return false;
+    });
+}
+
+// Recover Password Step 03 Reset Pass
+export function RecoverResetPassRequest(email,OTP,password){
+    store.dispatch(ShowLoader())
+    let URL=baseUrl+"/recoverResetPass";
+    let PostBody={email:email,otp:OTP,password:password}
+
+    return axios.post(URL,PostBody).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.data.data['status'] ==='failed'){
+                ErrorToast("New Password Creation failed");
+                return false;
+        }
+        else{
+            setOTP(OTP)
+            SuccessToast("New Password Created");
+            return true;
+        }
+    }).catch((err)=>{
+        ErrorToast("Error Occured")
         store.dispatch(HideLoader())
         return false;
     });
